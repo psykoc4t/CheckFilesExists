@@ -43,7 +43,7 @@ $entries = gci -Path $dir -Force -File
 $count = $entries.count
 }else{
 "Extension .$extension"
-$check = @(gci -Path $dir -Force -File | where-object {$_.extension -eq ".$extension"} | select-object lastWriteTime, name, @{Name="Kbytes"; Expression={[math]::Round(($_.Length / 1Kb),2)}})
+$check = @(gci -Path $dir -Force -File | where-object {$_.extension -eq ".$extension"} | select-object lastWriteTime, name, @{Name="Kbytes"; Expression={[math]::Round(($_.Length / 1Kb),2)}} | ConvertTo-Html -head $a)
 $entries = gci -Path $dir -Force -File | where-object {$_.extension -eq ".$extension"} 
 $count = $entries.count
 }
@@ -130,5 +130,5 @@ $PSScriptRoot\$scriptName
 ###### FIN DE LA FONCTIONS MAIL ######
 if($check.length -gt 0){
 "$count fichier(s) present(s)"
-SendMail -body $check | ConvertTo-Html -head $a
+SendMail -body $check
 }else{"Aucun fichier present dans $dir"}
