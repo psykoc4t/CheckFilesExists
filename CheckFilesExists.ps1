@@ -128,7 +128,7 @@ $PSScriptRoot\$scriptName
 	
 }
 ###### FIN DE LA FONCTIONS MAIL ######
-if($check.length -gt 0){
+if($count -gt 0){
 "$count fichier(s) present(s)"
 SendMail -body $check
 }else{"Aucun fichier present dans $dir"}
